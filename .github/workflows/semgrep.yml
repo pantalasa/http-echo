@@ -18,9 +18,10 @@ jobs:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     steps:
     - uses: actions/checkout@v4
-    - run: |-
-        curl -L https://github.com/semgrep/semgrep/releases/latest/download/semgrep-linux-amd64 -o semgrep && \
-        chmod +x semgrep && \
-        mv semgrep /usr/local/bin/semgrep && \
+    - name: Install Semgrep CLI (binary)
+       run: |
+         set -euo pipefail
+         curl -sSfL https://semgrep.dev/install.sh | sh -s -- -b "$HOME/.local/bin"
+         echo "$HOME/.local/bin" >> "$GITHUB_PATH"
         semgrep --version
     - run: semgrep ci
