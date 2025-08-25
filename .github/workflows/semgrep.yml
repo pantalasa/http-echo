@@ -7,9 +7,6 @@ on:
     - master
     paths:
     - .github/workflows/semgrep.yml
-  schedule:
-  # random HH:MM to avoid a load spike on GitHub Actions at 00:00
-  - cron: 33 3 * * *
 name: Semgrep
 jobs:
   semgrep:
@@ -22,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |-
-      curl -L https://github.com/semgrep/semgrep/releases/latest/download/semgrep-linux-amd64 -o semgrep && \
+        curl -L https://github.com/semgrep/semgrep/releases/latest/download/semgrep-linux-amd64 -o semgrep && \
         chmod +x semgrep && \
         mv semgrep /usr/local/bin/semgrep && \
         semgrep --version
