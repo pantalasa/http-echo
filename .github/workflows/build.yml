@@ -175,7 +175,7 @@ jobs:
     steps:
       - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
       - name: Docker Build (Action)
-        uses: hashicorp/actions-docker-build@v1
+        uses: hashicorp/actions-docker-build@main
         with:
           smoke_test: |
             TEST_VERSION="$(docker run "${IMAGE_NAME}" -version | awk '/http-echo/{print $2}' | sed s/v//)"
