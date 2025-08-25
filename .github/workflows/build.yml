@@ -8,7 +8,7 @@ env:
 jobs:
   get-go-version:
     name: "Determine Go toolchain version"
-    runs-on: ubuntu-latest
+    runs-on: lunar
     outputs:
       go-version: ${{ steps.get-go-version.outputs.go-version }}
     steps:
@@ -26,7 +26,7 @@ jobs:
           echo "go-version=$(go version | awk '{print $3}' | sed -e 's/^go//')" >> $GITHUB_OUTPUT
 
   set-product-version:
-    runs-on: ubuntu-latest
+    runs-on: lunar
     outputs:
       product-version: ${{ steps.set-product-version.outputs.product-version }}
       product-base-version: ${{ steps.set-product-version.outputs.base-product-version }}
@@ -39,7 +39,7 @@ jobs:
 
   generate-metadata-file:
     needs: set-product-version
-    runs-on: ubuntu-latest
+    runs-on: lunar
     outputs:
       filepath: ${{ steps.generate-metadata-file.outputs.filepath }}
     steps:
@@ -62,12 +62,12 @@ jobs:
     needs:
       - get-go-version
       - set-product-version
-    runs-on: ubuntu-latest
+    runs-on: lunar
     strategy:
       fail-fast: true
       matrix:
         goos: [windows]
-        goarch: ["386", "amd64"]
+        goarch: ["amd64"]
 
     name: Go ${{ needs.get-go-version.outputs.go-version }} ${{ matrix.goos }} ${{ matrix.goarch }} build
 
@@ -94,11 +94,11 @@ jobs:
     needs:
       - get-go-version
       - set-product-version
-    runs-on: ubuntu-latest
+    runs-on: lunar
     strategy:
       matrix:
         goos: [linux]
-        goarch: ["arm", "arm64", "386", "amd64"]
+        goarch: ["amd64"]
 
       fail-fast: true
 
@@ -131,7 +131,7 @@ jobs:
     strategy:
       matrix:
         goos: [darwin]
-        goarch: ["amd64", "arm64"]
+        goarch: ["amd64"]
       fail-fast: true
 
     name: Go ${{ needs.get-go-version.outputs.go-version }} ${{ matrix.goos }} ${{ matrix.goarch }} build
@@ -164,10 +164,10 @@ jobs:
     needs:
       - set-product-version
       - build-linux
-    runs-on: ubuntu-latest
+    runs-on: lunar
     strategy:
       matrix:
-        arch: ["arm64", "amd64"]
+        arch: ["amd64"]
     env:
       repo: ${{ github.event.repository.name }}
       version: ${{ needs.set-product-version.outputs.product-version }}
