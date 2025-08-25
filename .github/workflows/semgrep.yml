@@ -23,5 +23,5 @@ jobs:
         set -euo pipefail
         curl -sSfL https://semgrep.dev/install.sh | sh -s -- -b "$HOME/.local/bin"
         echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-       semgrep --version
+        semgrep --version
     - run: semgrep ci
