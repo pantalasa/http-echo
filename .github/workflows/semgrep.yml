@@ -20,8 +20,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install Semgrep CLI with pipx
       run: |
-        sudo apt-get update
-        sudo apt-get install -y python3-pip python3-venv pipx
-        pipx install semgrep
+        python3 -m pip install semgrep
         semgrep --version
     - run: semgrep ci
