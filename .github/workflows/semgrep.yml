@@ -21,8 +21,8 @@ jobs:
     - name: Install Semgrep CLI with pipx
       run: |
         set -euo pipefail
-        sudo apt-get update
-        sudo apt-get install -y python3-venv pipx
+        apt-get update
+        apt-get install -y python3-venv pipx
         pipx install semgrep
         echo "$HOME/.local/bin" >> "$GITHUB_PATH"
         semgrep --version
