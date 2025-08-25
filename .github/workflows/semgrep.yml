@@ -19,8 +19,11 @@ jobs:
       contents: read
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    container:
-      image: semgrep/semgrep
     steps:
     - uses: actions/checkout@v4
+    - run: |-
+      curl -L https://github.com/semgrep/semgrep/releases/latest/download/semgrep-linux-amd64 -o semgrep && \
+        chmod +x semgrep && \
+        mv semgrep /usr/local/bin/semgrep && \
+        semgrep --version
     - run: semgrep ci
