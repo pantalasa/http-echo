@@ -37,27 +37,6 @@ jobs:
         id: set-product-version
         uses: hashicorp/actions-set-product-version@v1
 
-  generate-metadata-file:
-    needs: set-product-version
-    runs-on: lunar
-    outputs:
-      filepath: ${{ steps.generate-metadata-file.outputs.filepath }}
-    steps:
-      - name: "Checkout directory"
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
-      - name: Generate metadata file
-        id: generate-metadata-file
-        uses: hashicorp/actions-generate-metadata@v1
-        with:
-          version: ${{ needs.set-product-version.outputs.product-version }}
-          product: ${{ env.PKG_NAME }}
-          repositoryOwner: "hashicorp"
-          repository: "http-echo"
-      - uses: actions/upload-artifact@v4
-        with:
-          name: metadata.json
-          path: ${{ steps.generate-metadata-file.outputs.filepath }}
-
   build-other:
     needs:
       - get-go-version
