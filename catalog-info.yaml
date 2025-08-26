@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: http-echo
+  description: Pantalasa http-echo service
+  labels:
+    earthly.dev/demo: true
+  annotations:
+    earthly.dev/service-discovery: http-echo
+  tags:
+    - golang
+  links:
+    - url: https://grafana.dev.pantalasa.org
+      title: Grafana central panel
+spec:
+  type: http-echo
+  lifecycle: production
+  owner: eng-team
+  system: public-websites
