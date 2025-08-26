@@ -20,5 +20,5 @@ jobs:
         apt-get install -y python3-venv pipx
         pipx install semgrep
         echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-        semgrep --version
+    - run: semgrep --version
     - run: semgrep ci
