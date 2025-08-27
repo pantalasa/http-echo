@@ -24,7 +24,7 @@ jobs:
       run: |
         semgrep --version
         which semgrep
-        ls -l /root/.local/semgrep
+        ls -l /root/.local/bin/semgrep
 
 
     - run: #semgrep ci
