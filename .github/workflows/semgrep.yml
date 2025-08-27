@@ -22,10 +22,4 @@ jobs:
         echo "/root/.local/bin" >> "$GITHUB_PATH"
     - name: Semgrep Scan
       run: |
-        semgrep --version
-        which semgrep
-        ls -l /root/.local/bin/semgrep
-        /root/.local/share/pipx/venvs/semgrep/bin/semgrep --version
-
-
-    - run: #semgrep ci
+        semgrep ci
