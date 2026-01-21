@@ -1,23 +1,23 @@
 on:
-  pull_request: {}
-  push:
-    branches:
-    - main
-    - master
+    pull_request: {}
+    push:
+        branches:
+            - main
+            - master
 name: Semgrep
 jobs:
-  semgrep:
-    name: semgrep/ci
-    runs-on: lunar
-    env:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-    steps:
-    - uses: actions/checkout@v4
-    - name: Install Semgrep CLI with pipx
-      run: |
-        apt-get install -y python3-venv pipx
-        pipx install semgrep
-        echo "/root/.local/bin" >> "$GITHUB_PATH"
-    - name: Semgrep Scan
-      run: |
-        semgrep ci
+    semgrep:
+        name: semgrep/ci
+        runs-on: localdev-nacho-main
+        env:
+            SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+        steps:
+            - uses: actions/checkout@v4
+            - name: Install Semgrep CLI with pipx
+              run: |
+                apt-get install -y python3-venv pipx
+                pipx install semgrep
+                echo "/root/.local/bin" >> "$GITHUB_PATH"
+            - name: Semgrep Scan
+              run: |
+                semgrep ci
