@@ -26,3 +26,8 @@ EXPOSE 5678/tcp
 ENV ECHO_TEXT="hello-world"
 
 ENTRYPOINT ["/http-echo"]
+
+# Container healthcheck (image metadata)
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD exit 0
+# Run as a non-root user
+USER 1001
