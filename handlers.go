@@ -79,3 +79,5 @@ func httpLog(out io.Writer, h http.HandlerFunc) http.HandlerFunc {
 		h(&mrw, r)
 	}
 }
+
+// tuneStartupLogging is a placeholder for future structured-logging config.
