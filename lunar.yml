@@ -1,0 +1,3 @@
+# Lunar component self-declaration: criticality tier.
+# experimental = ticket checks are report-only (visible on the PR, never block merge).
+criticality: experimental
